@@ -18,12 +18,13 @@ class Lista_Ligada:
 
     def exibir(self):
         """ Exibe os itens da lista """
-
+       elementos = []
         no_atual = self.primeiro
         while no_atual:
-            print(no_atual.item, end=" -> ")
+            elementos.append(str(no_atual.item))
             no_atual = no_atual.proximo
-        print("null")
+        elementos.append("null")
+        return " -> ".join(elementos)
 
     def pesquisar(self, item):
         """Retorna True caso o item procurado exista na lista e False, em caso contrário."""
