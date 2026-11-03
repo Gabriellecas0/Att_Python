@@ -2,10 +2,11 @@ from no import No
 
 class Lista_Ligada:
     def __init__(self):
-        self.primeiro = None
+        self.primeiro: No = None
         self.tamanho = 0
 
     def adicionar(self, item):
+        """ Adiciona no fim da lista """
         novo_no = No(item)
         if self.primeiro is None:
             self.primeiro = novo_no
@@ -17,15 +18,17 @@ class Lista_Ligada:
         self.tamanho += 1
 
     def exibir(self):
-        texto = ""
+        """ Exibe os itens da lista """
+        elementos = []
         no_atual = self.primeiro
         while no_atual:
-            texto += f"{no_atual.item} -> "
+            elementos.append(str(no_atual.item))
             no_atual = no_atual.proximo
-        texto += "null"
-        return texto
+        elementos.append("null")
+        return " -> ".join(elementos)
 
     def pesquisar(self, item):
+        """Retorna True caso o item procurado exista na lista e False, em caso contrário."""
         atual = self.primeiro
         while atual:
             if atual.item == item:
@@ -34,6 +37,8 @@ class Lista_Ligada:
         return False
 
     def obter(self, posicao):
+        """Retorna o item guardado em uma determinada posição da lista.
+        Caso a posição não exista na lista, retorna None."""
         if posicao < 0 or posicao >= self.tamanho:
             return None
         atual = self.primeiro
@@ -46,6 +51,8 @@ class Lista_Ligada:
         return None
 
     def inserir(self, posicao, item):
+        """Adiciona um item em uma posição da lista empurrando os demais itens.
+        Se a posição não é válida, retorna False. Se for válida, retorna True."""
         if posicao < 0 or posicao > self.tamanho:
             return False
         if posicao == 0:
@@ -58,13 +65,17 @@ class Lista_Ligada:
             while contador < posicao - 1:
                 atual = atual.proximo
                 contador += 1
+            
             novo_no = No(item)
             novo_no.proximo = atual.proximo
             atual.proximo = novo_no
+
         self.tamanho += 1
         return True
 
     def remover(self, posicao):
+        """Remove um item de uma posição da lista e retorna True.
+        Caso a posição não exista, retorna False."""
         if posicao < 0 or posicao >= self.tamanho:
             return False
         if posicao == 0:
@@ -80,6 +91,8 @@ class Lista_Ligada:
         return True
 
     def remover_item(self, item):
+        """Remove um item existente na lista e retorna True.
+        Caso o item não seja encontrado, retorna False."""
         if self.primeiro is None:
             return False
         if self.primeiro.item == item:
