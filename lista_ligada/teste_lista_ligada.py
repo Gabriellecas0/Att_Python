@@ -1,40 +1,56 @@
 from lista_ligada import Lista_Ligada
 
-def criar_lista():
+def test_adicionar_e_exibir():
     lista = Lista_Ligada()
     lista.adicionar(10)
     lista.adicionar(20)
     lista.adicionar(30)
-    return lista
-
-def test_adicionar():
-    lista = criar_lista()
-    lista.adicionar(40)
-    assert lista.exibir() == "10 -> 20 -> 30 -> 40 -> null"
-
-def test_exibir():
-    lista = criar_lista()
+    
+    assert lista.tamanho == 3
     assert lista.exibir() == "10 -> 20 -> 30 -> null"
 
 def test_pesquisar():
-    lista = criar_lista()
-    assert lista.pesquisar(20)
+    lista = Lista_Ligada()
+    lista.adicionar(5)
+    lista.adicionar(15)
+    
+    assert lista.pesquisar(15) is True
+    assert lista.pesquisar(99) is False
 
 def test_obter():
-    lista = criar_lista()
-    assert lista.obter(1) == 20
+    lista = Lista_Ligada()
+    lista.adicionar(100)
+    lista.adicionar(200)
+    
+    assert lista.obter(0) == 100
+    assert lista.obter(1) == 200
+    assert lista.obter(5) is None
 
 def test_inserir():
-    lista = criar_lista()
-    lista.inserir(1, 15)
-    assert lista.exibir() == "10 -> 15 -> 20 -> 30 -> null"
+    lista = Lista_Ligada()
+    lista.adicionar(10)
+    lista.adicionar(30)
+    
+    assert lista.inserir(1, 20) is True
+    assert lista.exibir() == "10 -> 20 -> 30 -> null"
+    assert lista.tamanho == 3
+    assert lista.inserir(10, 50) is False
 
 def test_remover():
-    lista = criar_lista()
-    lista.remover(1)
-    assert lista.exibir() == "10 -> 30 -> null"
+    lista = Lista_Ligada()
+    lista.adicionar(10)
+    lista.adicionar(20)
+    lista.adicionar(30)
+    assert lista.remover(0) is True
+    assert lista.exibir() == "20 -> 30 -> null"
+    assert lista.remover(10) is False
 
 def test_remover_item():
-    lista = criar_lista()
-    lista.remover_item(20)
-    assert lista.exibir() == "10 -> 30 -> null"
+    lista = Lista_Ligada()
+    lista.adicionar(5)
+    lista.adicionar(10)
+    lista.adicionar(15)
+  
+    assert lista.remover_item(10) is True
+    assert lista.exibir() == "5 -> 15 -> null"
+    assert lista.remover_item(99) is False
